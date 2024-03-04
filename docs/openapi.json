@@ -1,0 +1,1255 @@
+{
+    "components": {
+        "schemas": {
+            "MovieSearch": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "primaryTitle": {
+                                "type": "string",
+                                "example": "Interstellar"
+                            },
+                            "year": {
+                                "type": "integer",
+                                "example": 2012
+                            },
+                            "tconst": {
+                                "type": "string",
+                                "example": "tt0117731"
+                            },
+                            "imdbRating": {
+                                "type": "integer",
+                                "example": 8.4
+                            },
+                            "rottenTomatoesRating": {
+                                "type": "interger",
+                                "example": 90
+                            },
+                            "matacriticRating": {
+                                "type": "integer",
+                                "example": 92
+                            },
+                            "rated": {
+                                "type": "string",
+                                "example": "PG-13"
+                            }
+                        }
+                    }
+                }
+            },
+            "InvalidYear": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid year format. Format must be yyyy."
+                    }
+                }
+            },
+            "InvalidYearParam": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid query parameters: year. Query parameters are not permitted."
+                    }
+                }
+            },
+            "PeopleSearch": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "primaryName": {
+                                "type": "string",
+                                "example": "Gary because why not"
+                            },
+                            "birthYear": {
+                                "type": "interger",
+                                "example": 2003
+                            },
+                            "deathYear": {
+                                "type": "interger",
+                                "example": "2089"
+                            },
+                            "primaryProfession": {
+                                "type": "string",
+                                "example": "actor,soundtrack"
+                            },
+                            "knownForTitles": {
+                                "type": "string",
+                                "example": "tt0038355,tt0071877,tt0117057,tt0037382"
+                            }
+                        }
+                    }
+                }
+            },
+            "401Unauthorized": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Authorization header ('Bearer token') not found"
+                    }
+                }
+            },
+            "401Expired": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "JWT token has expired"
+                    }
+                }
+            },
+            "404Movie": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "No record exists of a movie with this ID"
+                    }
+                }
+            },
+            "404Person": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "No record exists of a person with this ID"
+                    }
+                }
+            },
+            "404User": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "User not found"
+                    }
+                }
+            },
+            "409Register": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "User already exists"
+                    }
+                }
+            },
+            "400Register": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Request body incomplete, both email and password are required"
+                    }
+                }
+            },
+            "201Register": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "User created"
+                    }
+                }
+            },
+            "401Login": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Incorrect email or password"
+                    }
+                }
+            },
+            "400Login": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Request body incomplete, both email and password are required"
+                    }
+                }
+            },
+            "200Login": {
+                "type": "object",
+                "properties": {
+                    "bearerToken": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string",
+                                "example": "ajsonwebtoken"
+                            },
+                            "token_type": {
+                                "type": "string",
+                                "example": "Bearer"
+                            },
+                            "expires_in": {
+                                "type": "integer",
+                                "example": 600
+                            }
+                        }
+                    },
+                    "refreshToken": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string",
+                                "example": "ajsonwebtoken"
+                            },
+                            "token_type": {
+                                "type": "string",
+                                "example": "Refresh"
+                            },
+                            "expires_in": {
+                                "type": "integer",
+                                "example": 86400
+                            }
+                        }
+                    }
+                }
+            },
+            "400Refresh": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Request body incomplete, refresh token required"
+                    }
+                }
+            },
+            "200Logout": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": false
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Token successfully invalidated"
+                    }
+                }
+            },
+            "200UserDetailsGet": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "gary@gmail.com"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "example": "Gary"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Nguyen"
+                    }
+                }
+            },
+            "200UserDetailsPut": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "gary@gmail.com"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "example": "Gary"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Nguyen"
+                    },
+                    "dob": {
+                        "type": "string",
+                        "example": "2003-01-13"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Fake Street, Springfield"
+                    }
+                }
+            },
+            "400UserDetailsPut": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Request body incomplete: firstName, lastName, dob and address are required"
+                    }
+                }
+            },
+            "403UserDetailsPut": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Forbidden"
+                    }
+                }
+            },
+            "404UserDetailsPut": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "User not found"
+                    }
+                }
+            }
+            
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "Bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Movie Information API",
+        "description": "This API provides access to publicly available data on a limited number of movies published from the year 1990 from the Internet Movie Database and other sources. The API endpoints and their usage are described in detail below.",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "Movies",
+            "description": ""
+        },
+        {
+            "name": "People",
+            "description": ""
+        },
+        {
+            "name": "User",
+            "description": ""
+        },
+        {
+            "name": "Update",
+            "description": ""
+        },
+        {
+            "name": "Authentication",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/movies/search": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "",
+                "description": "Returns a list of movie data. The list is arranged by imdbId, in ascending order.",
+                "operationId": "getMovieData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Text to search for in the primary title of the movie.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "The year of initial release of the movie",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of objects containing title, year, imdbID, imdbRating, rottenTomatoesRating, metacriticRating and classification properties. The results are limited to 100 per page. An example of one object in the array is shown below.",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                  "data": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "title": {
+                                          "type": "string",
+                                          "example": "Star Trek: First Contact"
+                                        },
+                                        "year": {
+                                          "type": "integer",
+                                          "example": 1996
+                                        },
+                                        "imdbID": {
+                                          "type": "string",
+                                          "example": "tt0117731"
+                                        },
+                                        "imdbRating": {
+                                          "type": "number",
+                                          "example": 7.6
+                                        },
+                                        "rottenTomatoesRating": {
+                                          "type": "number",
+                                          "example": 92
+                                        },
+                                        "metacriticRating": {
+                                          "type": "number",
+                                          "example": 71
+                                        },
+                                        "classification": {
+                                          "type": "string",
+                                          "example": "PG-13"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "pagination": {
+                                    "type": "object",
+                                    "properties": {
+                                      "total": {
+                                        "type": "number",
+                                        "example": 6
+                                      },
+                                      "lastPage": {
+                                        "type": "number",
+                                        "example": 1
+                                      },
+                                      "perPage": {
+                                        "type": "number",
+                                        "example": 100
+                                      },
+                                      "currentPage": {
+                                        "type": "number",
+                                        "example": 1
+                                      },
+                                      "from": {
+                                        "type": "number",
+                                        "example": 0
+                                      },
+                                      "to": {
+                                        "type": "number",
+                                        "example": 6
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                    },
+                    "400": {
+                        "description": "Invalid year query parameter. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidYear"
+                                }
+                            }
+                        }          
+                    }
+                }
+            }
+        },
+        "/movies/data/{imdbID}": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "",
+                "description": "Get data for a movie by imdbID",
+                "operationId": "getMovieInfo",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "imdbID",
+                        "in": "path",
+                        "required": true,
+                        "description": "The imdbID of the movie",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An object containing the data for the movie.",
+                        "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string",
+                                    "example": "Star Trek: First Contact"
+                                  },
+                                  "year": {
+                                    "type": "integer",
+                                    "example": 1996
+                                  },
+                                  "runtime": {
+                                    "type": "integer",
+                                    "example": 111
+                                  },
+                                  "genres": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "example": "Action"
+                                    },
+                                    "example": [
+                                      "Action",
+                                      "Adventure",
+                                      "Drama"
+                                    ]
+                                  },
+                                  "country": {
+                                    "type": "string",
+                                    "example": "United States"
+                                  },
+                                  "principals": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "example": "nm0001772"
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "example": "Patrick Stewart"
+                                        },
+                                        "category": {
+                                          "type": "string",
+                                          "example": "actor"
+                                        },
+                                        "characters": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "example": "Picard"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name",
+                                        "category",
+                                        "characters"
+                                      ]
+                                    },
+                                    "example": [
+                                      {
+                                        "id": "nm0005772",
+                                        "category": "cinematographer",
+                                        "name": "Matthew F. Leonetti",
+                                        "characters": []
+                                      },
+                                      {
+                                        "id": "nm0001772",
+                                        "category": "actor",
+                                        "name": "Patrick Stewart",
+                                        "characters": [
+                                          "Picard"
+                                        ]
+                                      },
+                                      {
+                                        "id": "nm0000408",
+                                        "category": "actor",
+                                        "name": "Jonathan Frakes",
+                                        "characters": [
+                                          "Riker"
+                                        ]
+                                      },
+                                      {
+                                        "id": "nm0000653",
+                                        "category": "actor",
+                                        "name": "Brent Spiner",
+                                        "characters": [
+                                          "Data"
+                                        ]
+                                      },
+                                      {
+                                        "id": "nm0000996",
+                                        "category": "actor",
+                                        "name": "LeVar Burton",
+                                        "characters": [
+                                          "Geordi"
+                                        ]
+                                      },
+                                      {
+                                        "id": "nm0734472",
+                                        "category": "writer",
+                                        "name": "Gene Roddenberry",
+                                        "characters": []
+                                      },
+                                      {
+                                        "id": "nm0075834",
+                                        "category": "writer",
+                                        "name": "Rick Berman",
+                                        "characters": []
+                                      },
+                                      {
+                                        "id": "nm0103804",
+                                        "category": "writer",
+                                        "name": "Brannon Braga",
+                                        "characters": []
+                                      },
+                                      {
+                                        "id": "nm0601822",
+                                        "category": "writer",
+                                        "name": "Ronald D. Moore",
+                                        "characters": []
+                                      },
+                                      {
+                                        "id": "nm0000025",
+                                        "category": "composer",
+                                        "name": "Jerry Goldsmith",
+                                        "characters": []
+                                      }
+                                    ]
+                                  },
+                                  "ratings": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "source": {
+                                          "type": "string",
+                                          "example": "Internet Movie Database"
+                                        },
+                                        "value": {
+                                          "type": "number",
+                                          "example": 7.6
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "boxoffice": {
+                                    "type": "integer",
+                                    "example": 92027888
+                                  },
+                                  "poster": {
+                                    "type": "string",
+                                    "example": "https://m.media-amazon.com/images/M/MV5BYzMzZmE3MTItODYzYy00YWI5LWFkNWMtZTY5NmU2MDkxYWI1XkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg"
+                                  },
+                                  "plot": {
+                                    "type": "string",
+                                    "example": "The Borg travel back in time intent on preventing Earth's first contact with an alien species. Captain Picard and his crew pursue them to ensure that Zefram Cochrane makes his maiden flight reaching warp speed."
+                                  }
+                                }
+                              }
+                            }
+                          }
+                    },
+                    "400": {
+                        "description": "Invalid year query parameter. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidYearParam"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested movie could not be found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/404Movie"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/people/{id}": {
+            "get": {
+                "security":[
+                    {"bearerAuth": []}
+                ],
+                "tags": [
+                    "People"
+                ],
+                "summary": "",
+                "description": "Get information about a person (actor, writer, director etc.) from their IMDB ID.",
+                "operationId": "getPeopleData",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "The person's IMDB ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An object containing data about that person",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PeopleSearch"
+                                }
+                            }
+                        }
+                        
+                    },
+                    "400": {
+                        "description": "Invalid year query parameter. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidYearParam"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/401Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The requested person could not be found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/404Person"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{email}/profile": {
+            "get": {
+                "security":[
+                    {"bearerAuth": []}
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "",
+                "description": "Returns a list user data",
+                "operationId": "getUserDetails",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "description": "The person's email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User's details displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/200UserDetailsGet"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/401Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No user exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/404User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security":[
+                    {"bearerAuth": []}
+                ],
+                "tags": [
+                    "Update"
+                ],
+                "summary": "",
+                "description": "Update User Data",
+                "operationId": "updateUserDetails",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "required": true,
+                        "description": "The person's email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string",
+                                        "example": "Gary"
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "Nguyen"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "example": "2003-01-13"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "45 Avenue Street, Puttburg"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User's Details successfully updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/200UserDetailsPut"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/400UserDetailsPut"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/401Unauthorized"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized. Wrong email credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/403UserDetailsPut"
+                                }
+                            }
+                        }
+                        
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/404UserDetailsPut"
+                                }
+                            }
+                        }      
+                    }
+                }
+            }
+        },
+        "/user/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "",
+                "description": "Creates a new user account. A request body containing the user to be registered must be sent.",
+                "operationId": "registerUser",
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "gary@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/201Register"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/400Register"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "User already exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/409Register"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "",
+                "description": "Log in to an existing user account. A request body containing the user credentials must be sent. The longExpiry bool is a setting for development use only that makes both tokens expire after a year.",
+                "operationId": "loginUser",
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "gary@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "longExpiry": {
+                                        "type": "string",
+                                        "example": false
+                                    },
+                                    "bearerExpiresInSeconds": {
+                                        "type": "interger",
+                                        "example": 600
+                                    },
+                                    "refreshExpiresInSeconds": {
+                                        "type": "interger",
+                                        "example": 86400
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Log in successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/200Login"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid log in request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/400Login"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Log in failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/401Login"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "",
+                "description": "Returns a list of movie data. The list is arranged by imdbId, in ascending order.",
+                "operationId": "refreshUser",
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refreshToken": {
+                                        "type": "string",
+                                        "example": "ajsonwebtoken"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token successfully refreshed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/200Login"
+                                }
+                            }
+                        }
+                        
+                    },
+                    "400": {
+                        "description": "Invalid refresh request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/400Refresh"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/401Expired"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "",
+                "description": "Returns a list of movie data. The list is arranged by imdbId, in ascending order.",
+                "operationId": "listCitiesAndDistricts",
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refreshToken": {
+                                        "type": "string",
+                                        "example": "ajsonwebtoken"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token successfully invalidated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/200Logout"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid refresh request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/400Refresh"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/401Expired"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
